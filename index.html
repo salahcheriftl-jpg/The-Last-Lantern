@@ -481,7 +481,18 @@ $('shpanel').onclick=()=>{if(S.open)return;if(!S.key){$('shtxt').innerHTML='<h3>
  S.open=1;sfx.creak();$('shpanel').classList.add('open');$('shdark').classList.add('open');$('shtxt').innerHTML='<h3>It opens!</h3>The key turns and the panel slides away. Behind it, a dark compartment full of objects.';setTimeout(buildItems,900)};
 let cur=null;
 const _pf=(k,img)=>{const f=FR[k];return '<div class="pic" style="left:'+f.w[0]+'%;top:'+f.w[1]+'%;width:'+f.w[2]+'%;height:'+f.w[3]+'%"><img src="'+img+'" alt=""></div><img class="fr" src="assets/ui/'+f.f+'.png" alt="">'};
-function setPor(k,e){const f=FR[k],d=$('dpf');d.style.setProperty('--ar',f.ar);d.innerHTML=_pf(k,face(k,e))+'<div class="nm">'+J[k].n+'</div><div class="rl">'+J[k].r+'</div>';$('dtab').textContent=J[k].n}
+/* preload every frame, face and plate so frame + picture appear together */
+const _PRE=[];
+(function(){const u=['assets/ui/plate.png'];Object.keys(FR).forEach(k=>{u.push('assets/ui/'+FR[k].f+'.png');u.push(face(k,0),face(k,1))});
+ u.forEach(src=>{const i=new Image();i.decoding='async';i.src=src;_PRE.push(i)})})();
+let _porTok=0;
+function setPor(k,e){const f=FR[k],d=$('dpf'),tok=++_porTok;d.style.setProperty('--ar',f.ar);
+ d.style.transition='none';d.style.opacity=0;
+ d.innerHTML=_pf(k,face(k,e))+'<div class="nm">'+J[k].n+'</div><div class="rl">'+J[k].r+'</div>';$('dtab').textContent=J[k].n;
+ const imgs=[...d.querySelectorAll('img')];
+ const reveal=()=>{if(tok!==_porTok)return;d.style.transition='opacity .18s';d.style.opacity=1};
+ Promise.all(imgs.map(i=>i.decode?i.decode().catch(()=>{}):Promise.resolve())).then(reveal);
+ setTimeout(reveal,1500)}
 function say(t,cls){const e=$('dsay');e.className=cls||'';e.innerHTML=t}
 function talk(k){$('dplate').onclick=null;$('dlg').classList.remove('lines');sfx.voice(k);cur=k;show('dlg',1);setPor(k,0);$('doth').innerHTML='';
  say(S.asked[k]?'...':({witness:'...You remember that day, don\'t you?',mouth:'Again... tell me the truth.',mimic:'That\'s what you said... right?',verdict:'Your answer doesn\'t make sense.',keeper:'You\'re not leaving yet.'})[k],'me');$('dlg').classList.remove('lines');opts()}
