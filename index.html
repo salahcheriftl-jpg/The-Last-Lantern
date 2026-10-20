@@ -327,6 +327,7 @@ body, button, .pap, #dplate, #msg, #dpf, .panel, .cutxt, #dsay, .opts button, .o
 .doc li{margin:.45em 0}
 .doc .sig{text-align:right;font-style:italic}
 .doc b{color:#5b130d}
+.doc img{display:block;width:100%;height:auto;margin:.5em 0 .9em;border:2px solid #2c1a0d;filter:none!important;box-shadow:0 .3em 1em #000a}
 </style></head><body>
 <div id="stage">
 <img id="bg" src="assets/backgrounds/scene.png" alt="">
@@ -391,7 +392,7 @@ const SHELF=[
 
 /* ===== READABLE DOCUMENTS (lore) ===== */
 const DOCS={
-paper:['Rules of the Session',`<p><i>Written in the Keeper's hand on a torn page. The Verdict says the court's law is never written down. The Keeper wrote it anyway, in secret.</i></p>
+paper:['Rules of the Session',[],`<p><i>Written in the Keeper's hand on a torn page. The Verdict says the court's law is never written down. The Keeper wrote it anyway, in secret.</i></p>
 <ol>
 <li>A session, once opened, closes only when its verdict is carried out.</li>
 <li>The accused need not be alive. Only the record must be complete. A dead man can still be judged.</li>
@@ -401,41 +402,44 @@ paper:['Rules of the Session',`<p><i>Written in the Keeper's hand on a torn page
 </ol>
 <p>The Present One signs last. Without the signature, the verdict does not happen.</p>
 <p class="sig">&mdash; K.</p>`],
-case17:['Session 17: the file',`<p><b>THE COURT OF THE LANTERN. Docket, Session 17.</b></p>
+blood:['Footprints in the blood',['doc_footprints.jpg'],`<p>Small bare footprints cross the floor, from the body toward the lantern. They are wet. The blood is not Elias's.</p>
+<p>They are a child's feet, and each print is heavier at the toes, as if the child was running. The prints stop at the lantern, where a small black handprint is pressed on the glass.</p>
+<p>You look at your own feet. They would fit.</p>`],
+case17:['Session 17: the file',['doc_case17.jpg'],`<p><b>THE COURT. Docket, Session 17.</b></p>
 <p><b>Accused:</b> Elias Moran, defence lawyer.<br><b>Charge:</b> freeing a guilty man by a legal trick.</p>
-<p>Elias found an error in the paperwork and freed a man the court wanted hanged. Weeks later the Saint Aldric orphanage burned. Seven children died.</p>
-<p>Page nine, the last page, is a confession from the arsonist. It names the person who paid for the fire. It is not Elias. It is a name the court did not want read aloud.</p>
-<p>The page is stamped <b>REJECTED</b>. In the margin: <i>"Not admitted. This court cannot be seen to have been wrong."</i></p>
-<p>Elias would have read that page to the court. He was too good a lawyer. A court that has never lost a verdict could not risk him alive.</p>
-<p><b>Sentence:</b> already written. <i>Carried out.</i></p>`],
-poison:['The bottle label',`<p><i>The handwriting is the Keeper's. It matches the note on the floor.</i></p>
+<p>Elias found an error in the paperwork and freed a man the court wanted hanged. Weeks later the orphanage burned. Seven children died.</p>
+<p>The last page of his file is a confession from the arsonist. It names the person who paid for the fire. It is not Elias. It is a name the court did not want read aloud. The page is stamped <b>REJECTED</b>. In the margin: <i>"Not admitted. This court cannot be seen to have been wrong."</i></p>
+<p>Elias would have read that page aloud. A court that has never lost a verdict could not risk him alive.</p>
+<p><b>Clipped inside the file:</b> a second dossier, <b>No. 2147/1958</b>, Court of Casablanca. <i>Child placement, orphanage "New Hope". Name: unknown, female, 6 to 8 years. Found alone near the abandoned orphanage on 12 August 1958. Status: unclaimed.</i> The final report closes the case for lack of identity and guardianship. It is stamped <b>REJECTED</b>. The court did not take her in. It filed her.</p>
+<p><b>Sentence on Elias:</b> already written. <i>Carried out.</i></p>`],
+poison:['The bottle label',[],`<p><i>The handwriting is the Keeper's. It matches the note on the floor.</i></p>
 <p><b>FOR THE ACCUSED, CASE 17.</b><br>Give before the session opens.</p>
 <p>A living man can argue. A living man can be acquitted. The court has never lost a verdict, and it will not start now.</p>
 <p>Once he is dead there is no one to defend. The trial only has to be finished, and it will be.</p>
 <p>By order of the Session.</p>
 <p class="sig">&mdash; K.</p>`],
-ledger:['Register of the Accused',`<p><b>Every judge in this room was once the accused.</b></p>
+ledger:['The court ledger',['doc_register.jpg'],`<p><b>The orphanage register.</b> Seventeen children, admitted between 1948 and 1951. Every name is crossed out in red, and every line says <b>Adopted</b>. Nobody who was adopted came back. At the bottom, in red ink: <b>Case 18</b>. The facing page is blank, waiting for a name.</p>
+<p>Inside the cover, a second list in the Keeper's hand: <b>every judge in this room was once the accused.</b></p>
 <p><b>Case 1.</b> The Verdict. Took the name of the first Verdict. <i>Sentence: to decide, forever.</i><br>
 <b>Case 3.</b> The Witness. Saw the wrong and said nothing. <i>Sentence: to watch, and never speak first.</i><br>
 <b>Case 5.</b> The Keeper. Kept the door while the court did wrong. <i>Sentence: to keep the room until relieved.</i><br>
 <b>Case 9.</b> The Mouth. Asked questions that buried the truth. <i>Sentence: to ask, and never be answered.</i><br>
 <b>Case 12.</b> The Mimic. A boy who copied other people's voices to survive, and some of those voices lied under oath. <i>Sentence: repeat until forgotten.</i></p>
-<p>The other cases (2, 4, 6, 7, 8, 10, 11, 13, 14, 15, 16): <i>Carried out.</i></p>
-<p><b>Case 17.</b> Elias Moran. <i>Session open.</i><br>
+<p>The other cases (2, 4, 6, 7, 8, 10, 11, 13, 14, 15, 16): <i>Carried out.</i><br>
+<b>Case 17.</b> Elias Moran. <i>Session open.</i><br>
 <b>Case 18.</b> The Present One.</p>
 <p><i>Note at the bottom: A court needs the accused to exist. An accused who lives, serves. The court cannot end while someone is left to serve in it.</i></p>`],
-photo:['The photograph',`<p><i>Eight children in front of the Saint Aldric orphanage, in spring.</i></p>
-<p>One child, at the edge, is circled in red ink. It is you.</p>
-<p>On the back, in a child's handwriting:<br><i>"Me, at the end. I was outside when the lamp fell."</i></p>
-<p>Under it, in the court's hand:<br><b>Present at the fire. Survivor. The only wronged party still living. Reserved: Case 17, for signature.</b></p>
-<p>The court needs the one who was hurt to sign. Their signature makes the verdict feel like justice instead of a crime.</p>`],
-watch:['Letter inside the watch',`<p><i>The back of the watch opens. A folded paper is hidden in it. The watch stopped at 3:17.</i></p>
+photo:['The photograph',['doc_photo_front.jpg','doc_photo_back.jpg'],`<p><b>Front.</b> Children in front of the orphanage. Eight of them. One, at the end, is circled in red ink. It is you.</p>
+<p><b>Back.</b> In a child's handwriting: <i>"We were happy here. I miss my friends. This is me, and an arrow. I'm the last one."</i></p>
+<p>On the right, the court's stamp: <b>Court of Casablanca. Case No. 2147/1958. Child placement approved. 12 Aug 1958.</b></p>
+<p>The same number as the file that rejected you. The court approved you and rejected you on the same day. It needs you alive and signing. It never needed you to be safe.</p>`],
+watch:['Letter inside the watch',['doc_watch.jpg'],`<p><i>The back of the watch opens. A folded paper is hidden in it. The watch stopped at 3:17. The letter begins: "To my dearest, if you're reading this..."</i></p>
 <p>"At 3:17 I signed the death of a man I knew was innocent. I was afraid to look weak. So I built this court, so that nobody would ever be afraid to judge again.</p>
 <p>I was wrong. A court that cannot admit a mistake only makes more of them. It feeds on the accused, and it turns each one into a judge.</p>
 <p>It will never stop itself. Someone from outside must stop it: the one it needs most, the Present One.</p>
 <p>Do not sign. Read the names aloud, all of them. A judge who hears his own name remembers he was once a person."</p>
 <p class="sig">&mdash; The First Verdict</p>`]};
-function readDoc(id){const d=DOCS[id];if(!d)return;popup(d[0],'<div class="doc">'+d[1]+'</div>',58)}
+function readDoc(id){const d=DOCS[id];if(!d)return;popup(d[0],'<div class="doc">'+d[1].map(f=>'<img src="'+'assets/objects/'+f+'" alt="">').join('')+d[2]+'</div>',58)}
 const LAN=[
 ['handle','Handle',36,8,30,14,'A bent metal handle. It has small finger marks, smaller than any hand in this room.'],
 ['glass','Glass',38,29,28,33,'The flame moves with no wind. There is a black handprint on the glass. A child\'s hand.'],
@@ -542,6 +546,7 @@ const _pf=(k,img)=>{const f=FR[k];return '<div class="pic" style="left:'+f.w[0]+
 const _PRE=[];
 (function(){const u=['assets/ui/plate.png'];Object.keys(FR).forEach(k=>{u.push('assets/ui/'+FR[k].f+'.png');u.push(face(k,0),face(k,1))});
  u.forEach(src=>{const i=new Image();i.decoding='async';i.src=src;_PRE.push(i)})})();
+setTimeout(()=>['doc_footprints','doc_photo_front','doc_photo_back','doc_watch','doc_case17','doc_register'].forEach(n=>{const i=new Image();i.src='assets/objects/'+n+'.jpg';_PRE.push(i)}),4000);
 let _porTok=0;
 function setPor(k,e){const f=FR[k],d=$('dpf'),tok=++_porTok;d.style.setProperty('--ar',f.ar);
  d.style.transition='none';d.style.opacity=0;
@@ -570,7 +575,7 @@ function ending(t){const E={A:['Ending: The New Witness','You signed. The lanter
 function nb(){$('nbl').innerHTML=S.ev.length?S.ev.map(i=>'<div class="entry"><b>'+EV[i][0]+'</b><br>'+EV[i][1]+(i=='key'?'<br><img src="assets/objects/key.jpg" style="width:35%">':'')+(DOCS[i]?'<br><button onclick="readDoc(\''+i+'\')">READ</button>':'')+'</div>').join(''):'<p>Nothing yet.</p>';show('nb',1)}
 function newGame(){S=fresh();build();['end','lan','shf','dlg','nb','info'].forEach(i=>show(i,0));show('menu',0);show('hud',1);stats();$('b-cont').disabled=false;sound(true);
  msg('You wake in a wooden room. No windows. No road. The lantern is the only light.');
- lines([['keeper','You are here. Do not ask how. The door is gone.'],['mouth','Your name? Your name? Your name?'],['mimic','My name? My name? (in your voice) My name?',1],['witness','He does not need to say it. The burns on his hand speak for him.',1],['verdict','Session 17 is open. The accused: Elias Moran. Condition: dead. The session does not stop when the accused dies.'],['keeper','Look around the room. Everything here holds an answer... and an accusation.',1]],()=>msg('Click the judges, the lantern, the shelf and the body.'))}
+ lines([['keeper','You are here. Do not ask how. The door is gone.'],['mouth','Your name? Your name? Your name?'],['mimic','My name? My name? (in your voice) My name?',1],['witness','She does not need to say it. The burns on her hand speak for her.',1],['verdict','Session 17 is open. The accused: Elias Moran. Condition: dead. The session does not stop when the accused dies.'],['keeper','Look around the room. Everything here holds an answer... and an accusation.',1]],()=>msg('Click the judges, the lantern, the shelf and the body.'))}
 let au=new Audio('assets/audio/ambience.mp3');au.loop=true;au.volume=.5;let on=true;
 function sound(p){if(p!==undefined)on=p;if(on)au.play().catch(()=>{});else au.pause();$('b-snd').textContent='SOUND: '+(on?'ON':'OFF')}
 $('b-snd').onclick=()=>sound(!on);$('b-snd2').onclick=()=>sound(!on);
