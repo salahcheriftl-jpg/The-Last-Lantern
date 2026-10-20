@@ -439,7 +439,7 @@ watch:['Letter inside the watch',['doc_watch.jpg'],`<p><i>The back of the watch 
 <p>It will never stop itself. Someone from outside must stop it: the one it needs most, the Present One.</p>
 <p>Do not sign. Read the names aloud, all of them. A judge who hears his own name remembers he was once a person."</p>
 <p class="sig">&mdash; The First Verdict</p>`]};
-function readDoc(id){const d=DOCS[id];if(!d)return;popup(d[0],'<div class="doc">'+d[1].map(f=>'<img src="'+'assets/objects/'+f+'" alt="">').join('')+d[2]+'</div>',58)}
+function readDoc(id){const d=DOCS[id];if(!d)return;popup(d[0],'<div class="doc">'+d[1].map(f=>'<img src="assets/objects/'+f+'" alt="" onerror="this.outerHTML=\'<p><b>[Picture not found: assets/objects/'+f+']</b></p>\'">').join('')+d[2]+'</div>',58)}
 const LAN=[
 ['handle','Handle',36,8,30,14,'A bent metal handle. It has small finger marks, smaller than any hand in this room.'],
 ['glass','Glass',38,29,28,33,'The flame moves with no wind. There is a black handprint on the glass. A child\'s hand.'],
