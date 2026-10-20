@@ -319,6 +319,14 @@ body, button, .pap, #dplate, #msg, #dpf, .panel, .cutxt, #dsay, .opts button, .o
 /* Other judges' interjections + menu faces bigger */
 .oth .pf{width:6em!important}
 #mfaces img{width:9em}
+
+/* readable documents */
+.doc{text-align:left}
+.doc p{margin:.7em 0}
+.doc ol{margin:.6em 0 .6em 1.6em}
+.doc li{margin:.45em 0}
+.doc .sig{text-align:right;font-style:italic}
+.doc b{color:#5b130d}
 </style></head><body>
 <div id="stage">
 <img id="bg" src="assets/backgrounds/scene.png" alt="">
@@ -380,6 +388,54 @@ const SHELF=[
 ['ledger','Ledger',16,67,33,22,'A book with a strange mark on the cover. It lists the judges as past accused. On the last page: "Case 18: The Present One". That is you.'],
 ['photo','Photograph',74,60,22,19,'An old photo of children in front of an orphanage. One child is circled in red. It is you. You were there the night of the fire.'],
 ['watch','Pocket watch',69,80,16,12,'A watch stopped at 03:17. Engraved: "To the First Verdict". Was the first Verdict human?']];
+
+/* ===== READABLE DOCUMENTS (lore) ===== */
+const DOCS={
+paper:['Rules of the Session',`<p><i>Written in the Keeper's hand on a torn page. The Verdict says the court's law is never written down. The Keeper wrote it anyway, in secret.</i></p>
+<ol>
+<li>A session, once opened, closes only when its verdict is carried out.</li>
+<li>The accused need not be alive. Only the record must be complete. A dead man can still be judged.</li>
+<li>A verdict is carried out only when the Present One signs. The Present One is the person the wrong was done to, and who still lives.</li>
+<li>Whoever signs, carries. Whoever carries, stays.</li>
+<li>None of us may leave until someone takes our place.</li>
+</ol>
+<p>The Present One signs last. Without the signature, the verdict does not happen.</p>
+<p class="sig">&mdash; K.</p>`],
+case17:['Session 17: the file',`<p><b>THE COURT OF THE LANTERN. Docket, Session 17.</b></p>
+<p><b>Accused:</b> Elias Moran, defence lawyer.<br><b>Charge:</b> freeing a guilty man by a legal trick.</p>
+<p>Elias found an error in the paperwork and freed a man the court wanted hanged. Weeks later the Saint Aldric orphanage burned. Seven children died.</p>
+<p>Page nine, the last page, is a confession from the arsonist. It names the person who paid for the fire. It is not Elias. It is a name the court did not want read aloud.</p>
+<p>The page is stamped <b>REJECTED</b>. In the margin: <i>"Not admitted. This court cannot be seen to have been wrong."</i></p>
+<p>Elias would have read that page to the court. He was too good a lawyer. A court that has never lost a verdict could not risk him alive.</p>
+<p><b>Sentence:</b> already written. <i>Carried out.</i></p>`],
+poison:['The bottle label',`<p><i>The handwriting is the Keeper's. It matches the note on the floor.</i></p>
+<p><b>FOR THE ACCUSED, CASE 17.</b><br>Give before the session opens.</p>
+<p>A living man can argue. A living man can be acquitted. The court has never lost a verdict, and it will not start now.</p>
+<p>Once he is dead there is no one to defend. The trial only has to be finished, and it will be.</p>
+<p>By order of the Session.</p>
+<p class="sig">&mdash; K.</p>`],
+ledger:['Register of the Accused',`<p><b>Every judge in this room was once the accused.</b></p>
+<p><b>Case 1.</b> The Verdict. Took the name of the first Verdict. <i>Sentence: to decide, forever.</i><br>
+<b>Case 3.</b> The Witness. Saw the wrong and said nothing. <i>Sentence: to watch, and never speak first.</i><br>
+<b>Case 5.</b> The Keeper. Kept the door while the court did wrong. <i>Sentence: to keep the room until relieved.</i><br>
+<b>Case 9.</b> The Mouth. Asked questions that buried the truth. <i>Sentence: to ask, and never be answered.</i><br>
+<b>Case 12.</b> The Mimic. A boy who copied other people's voices to survive, and some of those voices lied under oath. <i>Sentence: repeat until forgotten.</i></p>
+<p>The other cases (2, 4, 6, 7, 8, 10, 11, 13, 14, 15, 16): <i>Carried out.</i></p>
+<p><b>Case 17.</b> Elias Moran. <i>Session open.</i><br>
+<b>Case 18.</b> The Present One.</p>
+<p><i>Note at the bottom: A court needs the accused to exist. An accused who lives, serves. The court cannot end while someone is left to serve in it.</i></p>`],
+photo:['The photograph',`<p><i>Eight children in front of the Saint Aldric orphanage, in spring.</i></p>
+<p>One child, at the edge, is circled in red ink. It is you.</p>
+<p>On the back, in a child's handwriting:<br><i>"Me, at the end. I was outside when the lamp fell."</i></p>
+<p>Under it, in the court's hand:<br><b>Present at the fire. Survivor. The only wronged party still living. Reserved: Case 17, for signature.</b></p>
+<p>The court needs the one who was hurt to sign. Their signature makes the verdict feel like justice instead of a crime.</p>`],
+watch:['Letter inside the watch',`<p><i>The back of the watch opens. A folded paper is hidden in it. The watch stopped at 3:17.</i></p>
+<p>"At 3:17 I signed the death of a man I knew was innocent. I was afraid to look weak. So I built this court, so that nobody would ever be afraid to judge again.</p>
+<p>I was wrong. A court that cannot admit a mistake only makes more of them. It feeds on the accused, and it turns each one into a judge.</p>
+<p>It will never stop itself. Someone from outside must stop it: the one it needs most, the Present One.</p>
+<p>Do not sign. Read the names aloud, all of them. A judge who hears his own name remembers he was once a person."</p>
+<p class="sig">&mdash; The First Verdict</p>`]};
+function readDoc(id){const d=DOCS[id];if(!d)return;popup(d[0],'<div class="doc">'+d[1]+'</div>',58)}
 const LAN=[
 ['handle','Handle',36,8,30,14,'A bent metal handle. It has small finger marks, smaller than any hand in this room.'],
 ['glass','Glass',38,29,28,33,'The flame moves with no wind. There is a black handprint on the glass. A child\'s hand.'],
@@ -420,7 +476,8 @@ let msgT;function msg(t,c){let tab=c?'New clue':'The room',x=t;const m=/^(The [A
 function ev(id){if(S.ev.includes(id))return;sfx.clue();S.ev.push(id);S.f[id]=1;msg('New clue: '+EV[id][0],1);stats()}
 function stats(){$('stats').textContent='Clues: '+S.ev.length+' / '+Object.keys(EV).length+(S.key?'   |   KEY: yes':'')}
 function show(id,on){$(id).classList.toggle('hidden',!on)}
-function popup(t,b){$('it').textContent=t;$('ib').innerHTML=b;show('info',1)}
+let _intro=0;
+function popup(t,b,w){_intro=0;$('ix').textContent='OK';$('it').textContent=t;$('ib').innerHTML=b;$('info').firstElementChild.style.width=(w||50)+'%';show('info',1)}
 /* hit areas: [id,label,x,y,w,h,kind,z,polygon%]  -- coordinates are on the 1672x941 scene.
    Z-ORDER FIX (v0.8): small objects sit ABOVE the big judge boxes, the body is clipped to its own shape,
    so the judges' large invisible boxes can no longer swallow clicks meant for the body, barrel, box or note. */
@@ -464,7 +521,7 @@ function obj(k){
  if(k=='shelf'){sfx.zoom();sfx.shelf();show('shf',1);shBuild();return}
  const o=OB[k];sfx.zoom();sfx[k]();$('objbox').classList.toggle('plain',k=='body');$('objimg').style.filter=k=='body'?'none':'brightness('+(o.br||1.45)+') contrast(1.08)';$('objimg').src='assets/objects/'+o.img;$('objbox').style.cssText='--ar:'+o.ar+';height:'+Math.min(o.h,64)+'%';
  const hh=$('objhits');hh.innerHTML='';
- o.hs.forEach(s=>{const d=document.createElement('div');d.className='hit'+(s[6]&&S.ev.includes(s[6])?' done':'');d.style.cssText=`left:${s[1]}%;top:${s[2]}%;width:${s[3]}%;height:${s[4]}%`;d.innerHTML='<span class="lab">'+s[0]+'</span>';d.onclick=()=>{$('otxt').innerHTML='<h3>'+s[0]+'</h3>'+s[5];if(s[6]){ev(s[6]);d.classList.add('done')}};hh.appendChild(d)});
+ o.hs.forEach(s=>{const d=document.createElement('div');d.className='hit'+(s[6]&&S.ev.includes(s[6])?' done':'');d.style.cssText=`left:${s[1]}%;top:${s[2]}%;width:${s[3]}%;height:${s[4]}%`;d.innerHTML='<span class="lab">'+s[0]+'</span>';d.onclick=()=>{$('otxt').innerHTML='<h3>'+s[0]+'</h3>'+s[5];if(s[6]){ev(s[6]);d.classList.add('done');if(DOCS[s[6]])readDoc(s[6])}};hh.appendChild(d)});
  show('obj',1);$('otxt').innerHTML='<h3>'+o.t+'</h3>'+o.intro}
 function lanBuild(){const h=$('lanhits');h.innerHTML='';
  $('lantxt').innerHTML='<h3>The Lantern</h3>Click its parts: handle, glass, marks, base.';
@@ -476,7 +533,7 @@ function shBuild(){const op=S.open;$('shhits').innerHTML='';
  $('shpanel').classList.toggle('open',op);$('shdark').classList.toggle('open',op);
  $('shtxt').innerHTML=op?'<h3>Hidden compartment</h3>Click the objects inside.':'<h3>The shelf</h3>A wooden panel with a small lock.'+(S.key?' You have the key. Click the panel.':'');
  if(op)buildItems()}
-function buildItems(){const h=$('shhits');h.innerHTML='';SHELF.forEach(s=>{const d=document.createElement('div');d.className='hit'+(S.taken[s[0]]?' done':'');d.style.cssText=`left:${s[2]}%;top:${s[3]}%;width:${s[4]}%;height:${s[5]}%`;d.innerHTML='<span class="lab">'+s[1]+'</span>';d.onclick=()=>{S.taken[s[0]]=1;ev(s[0]);$('shtxt').innerHTML='<h3>'+s[1]+'</h3>'+s[6]+'<br><small>Added to your notebook.</small>';d.classList.add('done')};h.appendChild(d)})}
+function buildItems(){const h=$('shhits');h.innerHTML='';SHELF.forEach(s=>{const d=document.createElement('div');d.className='hit'+(S.taken[s[0]]?' done':'');d.style.cssText=`left:${s[2]}%;top:${s[3]}%;width:${s[4]}%;height:${s[5]}%`;d.innerHTML='<span class="lab">'+s[1]+'</span>';d.onclick=()=>{S.taken[s[0]]=1;ev(s[0]);$('shtxt').innerHTML='<h3>'+s[1]+'</h3>'+s[6]+'<br><small>Added to your notebook. Click it again to re-read.</small>';d.classList.add('done');readDoc(s[0])};h.appendChild(d)})}
 $('shpanel').onclick=()=>{if(S.open)return;if(!S.key){$('shtxt').innerHTML='<h3>The shelf</h3>It is locked. You need a key. (Ask the Keeper where it is.)';return}
  S.open=1;sfx.creak();$('shpanel').classList.add('open');$('shdark').classList.add('open');$('shtxt').innerHTML='<h3>It opens!</h3>The key turns and the panel slides away. Behind it, a dark compartment full of objects.';setTimeout(buildItems,900)};
 let cur=null;
@@ -510,18 +567,28 @@ function finale(){show('dlg',0);show('end',1);$('eh').textContent='The verdict o
  const o=$('eo');o.innerHTML='';[['Sign. The verdict is right.','A'],['Read the ledger out loud',S.f.ledger&&S.f.photo&&S.f.watch?'B':null],['I will not sign. I will not judge anyone.','C']].forEach(z=>{if(!z[1])return;const b=document.createElement('button');b.textContent=z[0];b.onclick=()=>ending(z[1]);o.appendChild(b)})}
 function ending(t){const E={A:['Ending: The New Witness','You signed. The lantern changed its light. The Keeper handed you a small bottle and said: "The Present One stays." On the wall, new letters appeared: Case 18. More people will come. And you will watch... or judge. You can no longer tell the difference.'],B:['Ending: The Judges on Trial','You read it out loud: the Witness, the Mouth, the Mimic, the Verdict, the Keeper. Each one was once accused. The room went silent. The Verdict said with no emotion: "Can a judge be judged?" The Keeper opened the wall. You do not know if it is the exit... or Case 18, for them.'],C:['Ending: Echo','You did not sign. The Mouth began: "Did not sign? Did not sign?" The Mimic started to speak in your voice. The session never ended. You are the only one without an answer... or one of them will give you an answer.']}[t];
  $('eh').textContent=E[0];$('eb').innerHTML='<p>'+E[1]+'</p>';const o=$('eo');o.innerHTML='';const b=document.createElement('button');b.textContent='NEW GAME';b.onclick=newGame;o.appendChild(b)}
-function nb(){$('nbl').innerHTML=S.ev.length?S.ev.map(i=>'<div class="entry"><b>'+EV[i][0]+'</b><br>'+EV[i][1]+(i=='key'?'<br><img src="assets/objects/key.jpg" style="width:35%">':'')+'</div>').join(''):'<p>Nothing yet.</p>';show('nb',1)}
+function nb(){$('nbl').innerHTML=S.ev.length?S.ev.map(i=>'<div class="entry"><b>'+EV[i][0]+'</b><br>'+EV[i][1]+(i=='key'?'<br><img src="assets/objects/key.jpg" style="width:35%">':'')+(DOCS[i]?'<br><button onclick="readDoc(\''+i+'\')">READ</button>':'')+'</div>').join(''):'<p>Nothing yet.</p>';show('nb',1)}
 function newGame(){S=fresh();build();['end','lan','shf','dlg','nb','info'].forEach(i=>show(i,0));show('menu',0);show('hud',1);stats();$('b-cont').disabled=false;sound(true);
  msg('You wake in a wooden room. No windows. No road. The lantern is the only light.');
  lines([['keeper','You are here. Do not ask how. The door is gone.'],['mouth','Your name? Your name? Your name?'],['mimic','My name? My name? (in your voice) My name?',1],['witness','He does not need to say it. The burns on his hand speak for him.',1],['verdict','Session 17 is open. The accused: Elias Moran. Condition: dead. The session does not stop when the accused dies.'],['keeper','Look around the room. Everything here holds an answer... and an accusation.',1]],()=>msg('Click the judges, the lantern, the shelf and the body.'))}
 let au=new Audio('assets/audio/ambience.mp3');au.loop=true;au.volume=.5;let on=true;
 function sound(p){if(p!==undefined)on=p;if(on)au.play().catch(()=>{});else au.pause();$('b-snd').textContent='SOUND: '+(on?'ON':'OFF')}
 $('b-snd').onclick=()=>sound(!on);$('b-snd2').onclick=()=>sound(!on);
-$('b-new').onclick=newGame;$('b-cont').onclick=()=>{show('menu',0);show('hud',1)};
+function intro(){popup('Your role',`<div class="doc">
+<p><b>You are the Present One.</b></p>
+<p>You wake up in a locked room with no door. A man lies dead on the floor, and five judges sit in judgment over him. You are not a detective, and you are not the accused. You are the person this court has been waiting for.</p>
+<p><b>What you do:</b></p>
+<ol>
+<li><b>Look around.</b> Click the body, the barrel, the box, the note, the lantern and the shelf. Every clue goes into your notebook.</li>
+<li><b>Talk to the judges.</b> Click each one and ask questions. Some answers only appear once you have found the right clue.</li>
+<li><b>Read the documents.</b> They explain what the court is, and what it wants from you.</li>
+<li><b>Choose.</b> In the end you hold the pen. Sign the verdict, expose the judges, or refuse. What you found decides which of these are open to you.</li>
+</ol></div>`,58);_intro=1;$('ix').textContent='BEGIN'}
+$('b-new').onclick=intro;$('b-cont').onclick=()=>{show('menu',0);show('hud',1)};
 $('b-menu').onclick=()=>{show('menu',1);show('hud',0)};
 $('b-how').onclick=()=>popup('How to play','<p>Click the five judges to talk. Click the lantern, the shelf, the body and other objects to look closer. Every clue goes into your notebook.</p><p>Tip: examine the lantern marks, then the base, to find a key for the shelf.</p>');
 $('b-cred').onclick=()=>popup('Credits','<p>The Last Lantern, Alpha 0.6. Art and music by you.</p>');
-$('ix').onclick=()=>show('info',0);$('nbx').onclick=()=>show('nb',0);$('b-nb').onclick=nb;
+$('ix').onclick=()=>{show('info',0);if(_intro){_intro=0;$('ix').textContent='OK';newGame()}};$('nbx').onclick=()=>show('nb',0);$('b-nb').onclick=nb;
 document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>{sfx.back();show('lan',0);show('shf',0);show('obj',0)});
 
 let AC,MG;function ac(){if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();MG=AC.createGain();MG.gain.value=.55;MG.connect(AC.destination)}if(AC.state=='suspended')AC.resume();return AC}
